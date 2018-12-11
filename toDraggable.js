@@ -42,7 +42,7 @@ var toDraggable = function(target,cb_onpointerdown,cb_onpointermove,cb_onpointer
 			// evt.preventDefault();evt.stopPropagation(); //이벤트 중지 안시킴
 			document.addEventListener('pointermove',_onpointermove);
 			document.addEventListener('pointerup',_onpointerup);
-if(cb_onpointerdown) cb_onpointerdown(evt,xy[0],xy[1],target,data);
+			if(cb_onpointerdown) cb_onpointerdown(evt,xy[0],xy[1],target,data);
 			return false;
 		}
 	}(target,data,cb_onpointerdown)
@@ -54,7 +54,7 @@ if(cb_onpointerdown) cb_onpointerdown(evt,xy[0],xy[1],target,data);
 			var gapY = xy[1]-data.y;
 			data.x = xy[0];
 			data.y = xy[1];
-			// evt.preventDefault();evt.stopPropagation();
+			evt.preventDefault();evt.stopPropagation();
 			if(cb_onpointermove) cb_onpointermove(evt,gapX,gapY,target,data);
 			return false;
 		}
