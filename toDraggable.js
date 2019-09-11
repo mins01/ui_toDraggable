@@ -80,11 +80,11 @@ var toDraggable = function(target,cb_onpointerdown,cb_onpointermove,cb_onpointer
 		}
 	}
 	var _onpointerover = function(evt){ 
-		target.classList.add('toDraggable-hover')
+		target.classList.add('toDraggable-box-hover')
 		// console.log("over");
 	}
 	var _onpointerout = function(evt){ 
-		target.classList.remove('toDraggable-hover')
+		target.classList.remove('toDraggable-box-hover')
 	}
 	var enable = function(){
 		if(!_enable){
@@ -123,17 +123,20 @@ var toDraggable = function(target,cb_onpointerdown,cb_onpointermove,cb_onpointer
 * @return {[type]}      [description]
 */
 toDraggable.cb_onpointerdown = function(evt,x,y,target,data){
-	target.classList.add('toDraggable-down')
+	target.classList.add('toDraggable-box-down')
+	target.ownerDocument.body.classList.add('toDraggable-body-down')
 }
 toDraggable.cb_onpointermove = function(evt,gapX,gapY,target,data){
 	// console.log(evt);
 	target.style.left = parseInt(target.style.left,10)+gapX+'px';
 	target.style.top = parseInt(target.style.top,10)+gapY+'px';
-	target.classList.add('toDraggable-move');
+	target.classList.add('toDraggable-box-move');
+	target.ownerDocument.body.classList.add('toDraggable-body-move')
 	return false;
 }
 toDraggable.cb_onpointerup = function(evt,target,data){
-	target.classList.remove('toDraggable-down','toDraggable-move')
+	target.classList.remove('toDraggable-box-down','toDraggable-box-move')
+	target.ownerDocument.body.classList.remove('toDraggable-body-down','toDraggable-body-move')
 }
 toDraggable.getHited = function(target){
 	'toDraggable-box'

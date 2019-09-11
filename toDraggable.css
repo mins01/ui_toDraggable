@@ -2,25 +2,28 @@
 
 .toDraggable-box{
 	position: absolute;
-	transition: filter 0.5s ease-out;
+	transition: filter 0.5s ease-out,box-shadow 0.5s ease-out;
 }
 
-.toDraggable-down{
+
+body.toDraggable-body-down{
+}
+body.toDraggable-body-move{
+}
+.toDraggable-box-down{
 	z-index: 99999;
+	box-shadow: 0px 0px 5px rgba(0,0,0,1);
+	opacity: 0.5;
 	
 }
-
-.toDraggable-move{
-	box-shadow: 0px 0px 5px rgba(0,0,0,0.5);
+.toDraggable-box-move{
 	
 }
-
-.toDraggable-up{
-	
-}
-
-.toDraggable-pointer-events-none{
+.toDraggable-box-down.toDraggable-with-pointer-events-none{
 	pointer-events: none;
+}
+body.toDraggable-body-down .toDraggable-box-hover:not(.toDraggable-box-down){
+	box-shadow: 0px 0px 5px rgba(255, 0, 0, 1);	
 }
 
 .toDraggable-enabled{
@@ -44,6 +47,3 @@
 /* .toDraggable-box:hover{
 	filter: brightness(1.2);
 } */
-.toDraggable-hover{
-	/* filter: brightness(1.2); */
-}
