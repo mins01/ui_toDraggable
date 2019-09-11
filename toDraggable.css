@@ -27,7 +27,8 @@
 	
 }
 .toDraggable-disabled{
-	filter:   brightness(0.5)  ;	
+	pointer-events: none;
+	filter:   brightness(0.5);
 }
 .toDraggable-with-icon::after{
 	font-size:1em; line-height: 1em;
