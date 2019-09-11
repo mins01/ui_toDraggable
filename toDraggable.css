@@ -2,7 +2,7 @@
 
 .toDraggable-box{
 	position: absolute;
-	transition: filter 0.5s ease-out,box-shadow 0.5s ease-out;
+	transition: filter 0.5s ease-out,box-shadow 0.5s ease-out,transform 0.5s ease-out;
 }
 
 
@@ -11,7 +11,7 @@ body.toDraggable-body-down{
 body.toDraggable-body-move{
 }
 .toDraggable-box-down{
-	z-index: 99999;
+	z-index: 90000;
 	box-shadow: 0px 0px 5px rgba(0,0,0,1);
 	opacity: 0.5;
 	
@@ -21,9 +21,12 @@ body.toDraggable-body-move{
 }
 .toDraggable-box-down.toDraggable-with-pointer-events-none{
 	pointer-events: none;
+	transform: scale(0.7);
 }
 body.toDraggable-body-down .toDraggable-box-hover:not(.toDraggable-box-down){
-	box-shadow: 0px 0px 5px rgba(255, 0, 0, 1);	
+	box-shadow: 0px 0px 5px rgba(0, 0, 0, 1);	
+	filter: brightness(1.5);
+	z-index: 80000
 }
 
 .toDraggable-enabled{
@@ -32,6 +35,23 @@ body.toDraggable-body-down .toDraggable-box-hover:not(.toDraggable-box-down){
 .toDraggable-disabled{
 	pointer-events: none;
 	filter:   brightness(0.5);
+}
+.toDraggable-with-icon.toDraggable-enabled{
+	cursor: move;
+	cursor: grab;
+}
+body.toDraggable-body-move{
+	cursor: move;
+	cursor: grabbing;
+}
+body.toDraggable-body-down .toDraggable-box-hover:not(.toDraggable-box-down){
+	cursor: move;
+	cursor: grab;
+	cursor: pointer;
+}
+.toDraggable-with-icon.toDraggable-disabled{
+	cursor:not-allowed;
+	cursor:no-drop;
 }
 .toDraggable-with-icon::after{
 	font-size:1em; line-height: 1em;

@@ -58,12 +58,10 @@
 	var cb_onpointerup2 = function(evt,target,data){
 		var hovers = document.querySelectorAll('body.toDraggable-body-down .toDraggable-box-hover:not(.toDraggable-box-down)'); //class= toDraggable-with-pointer-events-none 가 있어야만 동작한다.
 		if(hovers[0]){
-			// var t0 = target.innerText;
-			// target.innerText = hovers[0].innerText;
-			// hovers[0].innerText = t0;
 			var p0 = target.parentNode;
 			hovers[0].parentNode.append(target);
 			p0.append(hovers[0]);
+			console.log(target.dataset.idx ,'=>', hovers[0].dataset.idx);
 		}
 		target.classList.remove('toDraggable-pointer-events-none');
 		toDraggable.cb_onpointerup(evt,target,data)
@@ -196,28 +194,52 @@
 				<div style="clear:both"></div>
 				<div>
 					<div class="float-box" style="position:relative;width:100px;height:100px; float:left">
-						<div class="box toDraggable-box toDraggable-with-icon toDraggable-with-pointer-events-none" style="top:0px;left:0px;width:100px;height:100px; background-color:red">
+						<div data-idx="1" class="box toDraggable-box toDraggable-with-icon toDraggable-with-pointer-events-none" style="top:0px;left:0px;width:100px;height:100px; background-color:red">
 							1
 						</div>	
 					</div>
 					<div class="float-box" style="position:relative;width:100px;height:100px; float:left">
-						<div class="box toDraggable-box toDraggable-with-icon toDraggable-with-pointer-events-none" style="top:0px;left:0px;width:100px;height:100px; background-color:blue">
+						<div data-idx="2" class="box toDraggable-box toDraggable-with-icon toDraggable-with-pointer-events-none" style="top:0px;left:0px;width:100px;height:100px; background-color:blue">
 							2
 						</div>	
 					</div>
 					<div class="float-box" style="position:relative;width:100px;height:100px; float:left">
-						<div class="box toDraggable-box toDraggable-with-icon toDraggable-with-pointer-events-none" style="top:0px;left:0px;width:100px;height:100px; background-color:green">
+						<div data-idx="3" class="box toDraggable-box toDraggable-with-icon toDraggable-with-pointer-events-none" style="top:0px;left:0px;width:100px;height:100px; background-color:green">
 							3
 						</div>	
 					</div>
 					<div class="float-box" style="position:relative;width:100px;height:100px; float:left">
-						<div class="box toDraggable-box toDraggable-with-icon toDraggable-with-pointer-events-none" style="top:0px;left:0px;width:100px;height:100px; background-color:yellow">
+						<div data-idx="4" class="box toDraggable-box toDraggable-with-icon toDraggable-with-pointer-events-none" style="top:0px;left:0px;width:100px;height:100px; background-color:yellow">
 							4
 						</div>	
+					</div>
+					<div style="clear:both"></div>
+				</div>
+				<div>
+					<div class="float-box" style="position:relative;width:100px;height:100px; float:left">
+						<div data-idx="1" class="box toDraggable-box toDraggable-with-icon toDraggable-with-pointer-events-none" style="top:0px;left:0px;width:100px;height:100px; background-color:red">
+							1-1
+						</div>	
+					</div>
+					<div class="float-box" style="position:relative;width:100px;height:100px; float:left">
+						<div data-idx="2" class="box toDraggable-box toDraggable-with-icon toDraggable-with-pointer-events-none" style="top:0px;left:0px;width:100px;height:100px; background-color:blue">
+							2-2
+						</div>	
+					</div>
+					<div class="float-box" style="position:relative;width:100px;height:100px; float:left">
+						<div data-idx="3" class="box toDraggable-box toDraggable-with-icon toDraggable-with-pointer-events-none" style="top:0px;left:0px;width:100px;height:100px; background-color:green">
+							3-3
+						</div>	
+					</div>
+					<div class="float-box" style="position:relative;width:100px;height:100px; float:left">
+						<div data-idx="4" class="box toDraggable-box toDraggable-with-icon toDraggable-with-pointer-events-none" style="top:0px;left:0px;width:100px;height:100px; background-color:yellow">
+							4-4
+						</div>	
 					</div>	
+					<div style="clear:both"></div>
 				</div>
 				
-				<div style="clear:both"></div>
+				
 			</div>
 		</div>
 		
