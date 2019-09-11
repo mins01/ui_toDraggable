@@ -72,13 +72,29 @@ var toDraggable = function(target,cb_onpointerdown,cb_onpointermove,cb_onpointer
 	}(target,data,cb_onpointerup)
 	var _notouchmove = function(evt){ evt.preventDefault();evt.stopPropagation()	;return false;}
 	var _enable = false;
+	var setEnsabled = function(isEnabled){
+		if(isEnabled){
+			target.classList.replace('toDraggable-disabled','toDraggable-enabled')
+		}else{
+			target.classList.replace('toDraggable-enabled','toDraggable-disabled')
+		}
+	}
+	var _onpointerover = function(evt){ 
+		target.classList.add('toDraggable-hover')
+		// console.log("over");
+	}
+	var _onpointerout = function(evt){ 
+		target.classList.remove('toDraggable-hover')
+	}
 	var enable = function(){
 		if(!_enable){
 			target.addEventListener('pointerdown',_onpointerdown);
 			target.addEventListener('touchmove',_notouchmove);  
-			target.addEventListener('selectstart',_notouchmove);  
-			
+			target.addEventListener('selectstart',_notouchmove);
+			target.addEventListener('pointerover',_onpointerover);
+			target.addEventListener('pointerout',_onpointerout);
 			_enable = true;
+			setEnsabled(_enable)
 		}
 		
 	}
@@ -87,9 +103,13 @@ var toDraggable = function(target,cb_onpointerdown,cb_onpointermove,cb_onpointer
 			target.removeEventListener('pointerdown',_onpointerdown);
 			target.removeEventListener('touchmove',_notouchmove);
 			target.removeEventListener('selectstart',_notouchmove);
+			target.removeEventListener('pointerover',_onpointerover);
+			target.removeEventListener('pointerout',_onpointerout);
 			_enable = false;
+			setEnsabled(_enable)
 		}
 	}
+	target.classList.add('toDraggable-enabled')
 	enable();
 	
 	return {"enable":enable,"disable":disable}
@@ -103,10 +123,18 @@ var toDraggable = function(target,cb_onpointerdown,cb_onpointermove,cb_onpointer
 * @return {[type]}      [description]
 */
 toDraggable.cb_onpointerdown = function(evt,x,y,target,data){
+	target.classList.add('toDraggable-down')
 }
 toDraggable.cb_onpointermove = function(evt,gapX,gapY,target,data){
+	// console.log(evt);
 	target.style.left = parseInt(target.style.left,10)+gapX+'px';
 	target.style.top = parseInt(target.style.top,10)+gapY+'px';
+	target.classList.add('toDraggable-move');
+	return false;
 }
 toDraggable.cb_onpointerup = function(evt,target,data){
+	target.classList.remove('toDraggable-down','toDraggable-move')
+}
+toDraggable.getHited = function(target){
+	'toDraggable-box'
 }
