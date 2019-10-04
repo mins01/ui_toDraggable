@@ -50,10 +50,10 @@
 		target.setAttribute("data-on","2");
 	}
 	var cb_onpointerup = function(evt,target,data){
-		var hovers = document.querySelectorAll('body.toDraggable-body-down .toDraggable-box-hover:not(.toDraggable-box-down)'); //class= toDraggable-with-pointer-events-none 가 있어야만 동작한다.
+		var hovers = data.hovers;
 		if(hovers[0]) hovers[0].innerText += 'Selected target'		
 		target.classList.remove('toDraggable-pointer-events-none');
-		toDraggable.cb_onpointerup(evt,target,data)
+		toDraggable.cb_onpointerup(evt,target,data)	
 		target.setAttribute("data-on","0");	
 	}
 	// var cb_onpointerup2 = function(evt,target,data){
@@ -145,6 +145,10 @@
 					</ul>
 				</li>
 			</ul>
+			<h2>html attribute</h2>
+			<ul>
+				<li>data-drag-group="groupID" // 같은 그룹으로 지정되며, 드래그앤드롭시 동작을 제어할 수 있다.</li>
+			</ul>
 		</div>		
 		<div>
 			<h2>ex1 : toDraggable</h2>
@@ -167,16 +171,16 @@
 				</li>
 			</ol>
 			<div class="ex1" style="position:relative; height:300px; background-color:#efefef;">
-				<div class="box box1 toDraggable-box toDraggable-with-icon" style="top:0px;left:0px;">1
+				<div data-drag-group="dg1" class="box box1 toDraggable-box toDraggable-with-icon" style="top:0px;left:0px;">1
 					<button type="button">button</button>
 				</div>
-				<div class="box box1 toDraggable-box" style="top:0px;left:200px;">2
+				<div data-drag-group="dg1" class="box box1 toDraggable-box" style="top:0px;left:200px;">2
 					<button type="button">button</button>
 				</div>
-				<div class="box box2 toDraggable-box toDraggable-with-pointer-events-none" style="top:200px;left:0px;">3
+				<div data-drag-group="dg1" class="box box2 toDraggable-box " style="top:200px;left:0px;">3
 					<button type="button">button</button>
 				</div>
-				<div class="box box2 toDraggable-box toDraggable-with-pointer-events-none" style="top:200px;left:200px;">4
+				<div data-drag-group="dg1" class="box box2 toDraggable-box " style="top:200px;left:200px;">4
 					<button type="button">button</button>
 				</div>
 			</div>
@@ -232,22 +236,22 @@
 				<div style="clear:both"></div>
 				<div>
 					<div class="float-box" style="position:relative;width:100px;height:100px; float:left">
-						<div data-idx="1" class="toDraggable-box toDraggable-with-pointer-events-none" style="top:0px;left:0px;width:100px;height:100px; background-color:red">
+						<div data-drag-group="dg2" data-idx="1" class="toDraggable-box toDraggable-with-pointer-events-none" style="top:0px;left:0px;width:100px;height:100px; background-color:red">
 							1
 						</div>	
 					</div>
 					<div class="float-box" style="position:relative;width:100px;height:100px; float:left">
-						<div data-idx="2" class="toDraggable-box toDraggable-with-pointer-events-none" style="top:0px;left:0px;width:100px;height:100px; background-color:blue">
+						<div data-drag-group="dg2" data-idx="2" class="toDraggable-box toDraggable-with-pointer-events-none" style="top:0px;left:0px;width:100px;height:100px; background-color:blue">
 							2
 						</div>	
 					</div>
 					<div class="float-box" style="position:relative;width:100px;height:100px; float:left">
-						<div data-idx="3" class="box toDraggable-box toDraggable-with-icon toDraggable-with-pointer-events-none" style="top:0px;left:0px;width:100px;height:100px; background-color:green">
+						<div data-drag-group="dg2" data-idx="3" class="box toDraggable-box toDraggable-with-icon toDraggable-with-pointer-events-none" style="top:0px;left:0px;width:100px;height:100px; background-color:green">
 							3
 						</div>	
 					</div>
 					<div class="float-box" style="position:relative;width:100px;height:100px; float:left">
-						<div data-idx="4" class="box toDraggable-box toDraggable-with-icon toDraggable-with-pointer-events-none" style="top:0px;left:0px;width:100px;height:100px; background-color:yellow">
+						<div data-drag-group="dg2" data-idx="4" class="box toDraggable-box toDraggable-with-icon toDraggable-with-pointer-events-none" style="top:0px;left:0px;width:100px;height:100px; background-color:yellow">
 							4
 						</div>	
 					</div>
@@ -255,22 +259,22 @@
 				</div>
 				<div>
 					<div class="float-box" style="position:relative;width:100px;height:100px; float:left">
-						<div data-idx="1" class="box toDraggable-box toDraggable-with-icon toDraggable-with-pointer-events-none" style="top:0px;left:0px;width:100px;height:100px; background-color:red">
+						<div data-drag-group="dg2" data-idx="1" class="box toDraggable-box toDraggable-with-icon toDraggable-with-pointer-events-none" style="top:0px;left:0px;width:100px;height:100px; background-color:red">
 							1-1
 						</div>	
 					</div>
 					<div class="float-box" style="position:relative;width:100px;height:100px; float:left">
-						<div data-idx="2" class="box toDraggable-box toDraggable-with-icon toDraggable-with-pointer-events-none" style="top:0px;left:0px;width:100px;height:100px; background-color:blue">
+						<div data-drag-group="dg2" data-idx="2" class="box toDraggable-box toDraggable-with-icon toDraggable-with-pointer-events-none" style="top:0px;left:0px;width:100px;height:100px; background-color:blue">
 							2-2
 						</div>	
 					</div>
 					<div class="float-box" style="position:relative;width:100px;height:100px; float:left">
-						<div data-idx="3" class="box toDraggable-box toDraggable-with-icon toDraggable-with-pointer-events-none" style="top:0px;left:0px;width:100px;height:100px; background-color:green">
+						<div data-drag-group="dg2" data-idx="3" class="box toDraggable-box toDraggable-with-icon toDraggable-with-pointer-events-none" style="top:0px;left:0px;width:100px;height:100px; background-color:green">
 							3-3
 						</div>	
 					</div>
 					<div class="float-box" style="position:relative;width:100px;height:100px; float:left">
-						<div data-idx="4" class="box toDraggable-box toDraggable-with-icon toDraggable-with-pointer-events-none" style="top:0px;left:0px;width:100px;height:100px; background-color:yellow">
+						<div data-drag-group="dg2" data-idx="4" class="box toDraggable-box toDraggable-with-icon toDraggable-with-pointer-events-none" style="top:0px;left:0px;width:100px;height:100px; background-color:yellow">
 							4-4
 						</div>	
 					</div>	

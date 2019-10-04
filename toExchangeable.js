@@ -15,14 +15,15 @@ var toExchangeable = function(target,cb_onpointerdown,cb_onpointermove,cb_change
 	let cb_onpointerup = toExchangeable.generate_cb_onpointerup(cb_changed,selectorHover)
 	return toDraggable(target,cb_onpointerdown,cb_onpointermove,cb_onpointerup);
 }
-toExchangeable.selectorHover = 'body.toDraggable-body-down .toDraggable-box-hover:not(.toDraggable-box-down)';
+// toExchangeable.selectorHover = 'body.toDraggable-body-down .toDraggable-box-hover:not(.toDraggable-box-down)';
 toExchangeable.cb_onpointerdown = toDraggable.cb_onpointerdown;
 toExchangeable.cb_onpointermove = toDraggable.cb_onpointermove;
 toExchangeable.cb_onpointerup = toDraggable.cb_onpointerup;
 toExchangeable.generate_cb_onpointerup = function(cb_changed,selectorHover){
-	if(!selectorHover) selectorHover = toExchangeable.selectorHover;
+	// if(!selectorHover) selectorHover = toExchangeable.selectorHover;
 	return function(evt,target,data){
-		var hovers = document.querySelectorAll(selectorHover); //class= toDraggable-with-pointer-events-none 가 있어야만 동작한다.
+		var hovers = data.hovers
+		// var hovers = document.querySelectorAll(selectorHover); //class= toDraggable-with-pointer-events-none 가 있어야만 동작한다.
 		if(hovers[0]){
 			cb_changed(target,hovers[0]);
 		}

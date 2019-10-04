@@ -13,7 +13,9 @@ var toDraggable = function(target,cb_onpointerdown,cb_onpointermove,cb_onpointer
 	var data={
 		"ing":false,
 		"x":0,
-		"y":0
+		"y":0,
+		boxes:[],
+		hovers:[]
 	}
 	var _getXY = function(evt){
 		var x = evt.clientX;
@@ -31,14 +33,35 @@ var toDraggable = function(target,cb_onpointerdown,cb_onpointermove,cb_onpointer
 		}
 		return [x,y];
 	}
+	var getHoverBox = function(boxes,x,y){		
+		let r = [];
+		for(let i=0,m=boxes.length;i<m;i++){
+			let target = boxes[i]
+			let clientRect = target.getBoundingClientRect(); // DomRect 구하기 (각종 좌표값이 들어있는 객체)
+			if( clientRect.left<=x && x<= clientRect.right && clientRect.top<=y && y<= clientRect.bottom ){
+				r.push(target);
+			}
+		}
+		// console.log(r);
+		return r
+	}
 	var _onpointerdown = function(target,data,cb_onpointerdown){
 		// var target = evt.target;
 		return function(evt){
 			data.ing = true;
+			target.classList.add('toDraggable-on')
 			var xy = _getXY(evt);
 			data.x = xy[0];
 			data.y = xy[1];
+			if(target.hasAttribute('data-drag-group')){
+				let q = '.toDraggable-box[data-drag-group="'+target.getAttribute('data-drag-group')+'"]:not(.toDraggable-on)'
+				// console.log(q);
+				data.boxes = document.querySelectorAll(q);
+			}else{
+				data.boxes = [];
+			}
 			
+			// console.log(boxes);
 			// evt.preventDefault();evt.stopPropagation(); //이벤트 중지 안시킴
 			document.addEventListener('pointermove',_onpointermove);
 			document.addEventListener('pointerup',_onpointerup);
@@ -54,6 +77,7 @@ var toDraggable = function(target,cb_onpointerdown,cb_onpointermove,cb_onpointer
 			var gapY = xy[1]-data.y;
 			data.x = xy[0];
 			data.y = xy[1];
+			data.hovers = getHoverBox(data.boxes,xy[0],xy[1])
 			evt.preventDefault();evt.stopPropagation();
 			if(cb_onpointermove) cb_onpointermove(evt,gapX,gapY,target,data);
 			return false;
@@ -63,9 +87,13 @@ var toDraggable = function(target,cb_onpointerdown,cb_onpointermove,cb_onpointer
 		return function(evt){
 			if(data.ing){
 				data.ing = false;
+
+				target.classList.remove('toDraggable-on')
 				document.removeEventListener('pointermove',_onpointermove);
 				document.removeEventListener('pointerup',_onpointerup);
 				if(cb_onpointerup) cb_onpointerup(evt,target,data);	
+				data.boxes = [];
+				data.hovers = [];
 			}			
 			return false;
 		}
@@ -128,8 +156,8 @@ toDraggable.cb_onpointerdown = function(evt,x,y,target,data){
 }
 toDraggable.cb_onpointermove = function(evt,gapX,gapY,target,data){
 	// console.log(evt);
-	target.style.left = parseInt(target.style.left,10)+gapX+'px';
-	target.style.top = parseInt(target.style.top,10)+gapY+'px';
+	target.style.left = parseFloat(target.style.left)+gapX+'px';
+	target.style.top = parseFloat(target.style.top)+gapY+'px';
 	target.classList.add('toDraggable-box-move');
 	target.ownerDocument.body.classList.add('toDraggable-body-move')
 	return false;
