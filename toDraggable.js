@@ -54,7 +54,7 @@ var toDraggable = function(target,cb_onpointerdown,cb_onpointermove,cb_onpointer
 			data.x = xy[0];
 			data.y = xy[1];
 			if(target.hasAttribute('data-drag-group')){
-				let q = '.toDraggable-box[data-drag-group="'+target.getAttribute('data-drag-group')+'"]:not(.toDraggable-on)'
+				let q = '.toDraggable-box.toDraggable-enabled[data-drag-group="'+target.getAttribute('data-drag-group')+'"]:not(.toDraggable-on)'
 				// console.log(q);
 				data.boxes = document.querySelectorAll(q);
 			}else{

@@ -56,20 +56,6 @@
 		toDraggable.cb_onpointerup(evt,target,data)	
 		target.setAttribute("data-on","0");	
 	}
-	// var cb_onpointerup2 = function(evt,target,data){
-	// 	var hovers = document.querySelectorAll('body.toDraggable-body-down .toDraggable-box-hover:not(.toDraggable-box-down)'); //class= toDraggable-with-pointer-events-none 가 있어야만 동작한다.
-	// 	if(hovers[0]){
-	// 		var p0 = target.parentNode;
-	// 		hovers[0].parentNode.append(target);
-	// 		p0.append(hovers[0]);
-	// 		console.log(target.dataset.idx ,'=>', hovers[0].dataset.idx);
-	// 	}
-	// 	target.classList.remove('toDraggable-pointer-events-none');
-	// 	toDraggable.cb_onpointerup(evt,target,data)
-	// 	target.setAttribute("data-on","0");	
-	// 	target.style.left = '0px';
-	// 	target.style.top = '0px';
-	// }
 	var cb_changed = function(from,to){
 		var p0 = from.parentNode;
 		to.parentNode.append(from);
@@ -77,7 +63,6 @@
 		console.log(from.dataset.idx ,'=>', to.dataset.idx);	
 	}
 	
-	var toExchangeable_selectorHover = 'body.toDraggable-body-down .ex2 .toDraggable-box-hover:not(.toDraggable-box-down)'
 	window.addEventListener("load",
 		function(evt){
 			var boxes1 = document.querySelectorAll('.box1');
@@ -91,7 +76,7 @@
 		
 			var ex2_boxes = document.querySelectorAll('.ex2 .toDraggable-box');
 			for(var i=0,m=ex2_boxes.length;i<m;i++){
-				ex2_boxes[i].toDraggableCtrl = toExchangeable(ex2_boxes[i],toExchangeable.cb_onpointerdown,toExchangeable.cb_onpointermove,cb_changed,toExchangeable_selectorHover);
+				ex2_boxes[i].toDraggableCtrl = toExchangeable(ex2_boxes[i],toExchangeable.cb_onpointerdown,toExchangeable.cb_onpointermove,cb_changed);
 			}
 		}	
 	)
@@ -190,11 +175,11 @@
 			<h2>toExchangeable</h2>
 			<ul>
 				<li>html_node의 드래그 이벤트 제어를 할 수 있게 해준다.</li>
-				<li>required : class = toDraggable-box toDraggable-with-pointer-events-none</li>
+				<li>required : class = toDraggable-box</li>
 			</ul>
 			<h2>function</h2>
 			<ul>
-				<li>toDraggableCtrl = toExchangeable(target,cb_onpointerdown,cb_onpointermove,cb_onchanged,selectorHover) //target에 드래그 이벤트 설정</li>
+				<li>toDraggableCtrl = toExchangeable(target,cb_onpointerdown,cb_onpointermove,cb_onchanged) //target에 드래그 이벤트 설정</li>
 				
 			</ul>
 			<h2>method</h2>
@@ -204,7 +189,7 @@
 				<li>toExchangeable.cb_onpointerdown = toDraggable.cb_onpointerdown</li>
 				<li>toExchangeable.cb_onpointermove = toDraggable.cb_onpointermove</li>
 				<li>toExchangeable.cb_onpointerup = toDraggable.cb_onpointerup</li>
-				<li>function = toExchangeable.generate_cb_onpointerup(cb_changed,selectorHover) //cb_changed,selectorHover 를 기준으로 cb_onpointerup 함수를 만든다. 직접 사용할 필요 없다.</li>
+				<li>function = toExchangeable.generate_cb_onpointerup(cb_changed) //cb_changed 를 기준으로 cb_onpointerup 함수를 만든다. 직접 사용할 필요 없다.</li>
 				<li>toExchangeable.cb_changed(from:html_node,to;html_node); //이벤트 발생 node, to node 를 가져와서 처리</li>
 			</ul>
 			<h2>property</h2>
@@ -236,22 +221,22 @@
 				<div style="clear:both"></div>
 				<div>
 					<div class="float-box" style="position:relative;width:100px;height:100px; float:left">
-						<div data-drag-group="dg2" data-idx="1" class="toDraggable-box toDraggable-with-pointer-events-none" style="top:0px;left:0px;width:100px;height:100px; background-color:red">
+						<div data-drag-group="dg2" data-idx="1" class="toDraggable-box " style="top:0px;left:0px;width:100px;height:100px; background-color:red">
 							1
 						</div>	
 					</div>
 					<div class="float-box" style="position:relative;width:100px;height:100px; float:left">
-						<div data-drag-group="dg2" data-idx="2" class="toDraggable-box toDraggable-with-pointer-events-none" style="top:0px;left:0px;width:100px;height:100px; background-color:blue">
+						<div data-drag-group="dg2" data-idx="2" class="toDraggable-box " style="top:0px;left:0px;width:100px;height:100px; background-color:blue">
 							2
 						</div>	
 					</div>
 					<div class="float-box" style="position:relative;width:100px;height:100px; float:left">
-						<div data-drag-group="dg2" data-idx="3" class="box toDraggable-box toDraggable-with-icon toDraggable-with-pointer-events-none" style="top:0px;left:0px;width:100px;height:100px; background-color:green">
+						<div data-drag-group="dg2" data-idx="3" class="box toDraggable-box toDraggable-with-icon " style="top:0px;left:0px;width:100px;height:100px; background-color:green">
 							3
 						</div>	
 					</div>
 					<div class="float-box" style="position:relative;width:100px;height:100px; float:left">
-						<div data-drag-group="dg2" data-idx="4" class="box toDraggable-box toDraggable-with-icon toDraggable-with-pointer-events-none" style="top:0px;left:0px;width:100px;height:100px; background-color:yellow">
+						<div data-drag-group="dg2" data-idx="4" class="box toDraggable-box toDraggable-with-icon " style="top:0px;left:0px;width:100px;height:100px; background-color:yellow">
 							4
 						</div>	
 					</div>
@@ -259,22 +244,22 @@
 				</div>
 				<div>
 					<div class="float-box" style="position:relative;width:100px;height:100px; float:left">
-						<div data-drag-group="dg2" data-idx="1" class="box toDraggable-box toDraggable-with-icon toDraggable-with-pointer-events-none" style="top:0px;left:0px;width:100px;height:100px; background-color:red">
+						<div data-drag-group="dg2" data-idx="1" class="box toDraggable-box toDraggable-with-icon " style="top:0px;left:0px;width:100px;height:100px; background-color:red">
 							1-1
 						</div>	
 					</div>
 					<div class="float-box" style="position:relative;width:100px;height:100px; float:left">
-						<div data-drag-group="dg2" data-idx="2" class="box toDraggable-box toDraggable-with-icon toDraggable-with-pointer-events-none" style="top:0px;left:0px;width:100px;height:100px; background-color:blue">
+						<div data-drag-group="dg2" data-idx="2" class="box toDraggable-box toDraggable-with-icon " style="top:0px;left:0px;width:100px;height:100px; background-color:blue">
 							2-2
 						</div>	
 					</div>
 					<div class="float-box" style="position:relative;width:100px;height:100px; float:left">
-						<div data-drag-group="dg2" data-idx="3" class="box toDraggable-box toDraggable-with-icon toDraggable-with-pointer-events-none" style="top:0px;left:0px;width:100px;height:100px; background-color:green">
+						<div data-drag-group="dg2" data-idx="3" class="box toDraggable-box toDraggable-with-icon " style="top:0px;left:0px;width:100px;height:100px; background-color:green">
 							3-3
 						</div>	
 					</div>
 					<div class="float-box" style="position:relative;width:100px;height:100px; float:left">
-						<div data-drag-group="dg2" data-idx="4" class="box toDraggable-box toDraggable-with-icon toDraggable-with-pointer-events-none" style="top:0px;left:0px;width:100px;height:100px; background-color:yellow">
+						<div data-drag-group="dg2" data-idx="4" class="box toDraggable-box toDraggable-with-icon " style="top:0px;left:0px;width:100px;height:100px; background-color:yellow">
 							4-4
 						</div>	
 					</div>	
