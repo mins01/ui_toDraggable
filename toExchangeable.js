@@ -24,10 +24,6 @@ toExchangeable.generate_cb_onpointerup = function(cb_changed,selectorHover){
 	return function(evt,target,data){
 		var hovers = document.querySelectorAll(selectorHover); //class= toDraggable-with-pointer-events-none 가 있어야만 동작한다.
 		if(hovers[0]){
-			var p0 = target.parentNode;
-			hovers[0].parentNode.append(target);
-			p0.append(hovers[0]);
-			// console.log(target.dataset.idx ,'=>', hovers[0].dataset.idx);
 			cb_changed(target,hovers[0]);
 		}
 		target.classList.remove('toDraggable-pointer-events-none');

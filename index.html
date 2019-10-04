@@ -70,6 +70,13 @@
 	// 	target.style.left = '0px';
 	// 	target.style.top = '0px';
 	// }
+	var cb_changed = function(from,to){
+		var p0 = from.parentNode;
+		to.parentNode.append(from);
+		p0.append(to);
+		console.log(from.dataset.idx ,'=>', to.dataset.idx);	
+	}
+	
 	var toExchangeable_selectorHover = 'body.toDraggable-body-down .ex2 .toDraggable-box-hover:not(.toDraggable-box-down)'
 	window.addEventListener("load",
 		function(evt){
@@ -84,7 +91,7 @@
 		
 			var ex2_boxes = document.querySelectorAll('.ex2 .toDraggable-box');
 			for(var i=0,m=ex2_boxes.length;i<m;i++){
-				ex2_boxes[i].toDraggableCtrl = toExchangeable(ex2_boxes[i],toExchangeable.cb_onpointerdown,toExchangeable.cb_onpointermove,toExchangeable.cb_changed,toExchangeable_selectorHover);
+				ex2_boxes[i].toDraggableCtrl = toExchangeable(ex2_boxes[i],toExchangeable.cb_onpointerdown,toExchangeable.cb_onpointermove,cb_changed,toExchangeable_selectorHover);
 			}
 		}	
 	)
