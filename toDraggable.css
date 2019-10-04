@@ -36,18 +36,22 @@ body.toDraggable-body-down .toDraggable-box-hover:not(.toDraggable-box-down){
 	pointer-events: none;
 	filter:   brightness(0.5);
 }
-.toDraggable-with-icon.toDraggable-enabled{
+/* .toDraggable-with-icon.toDraggable-enabled{
+	cursor: move;
+	cursor: grab;
+} */
+.toDraggable-box{
 	cursor: move;
 	cursor: grab;
 }
-body.toDraggable-body-move{
-	cursor: move;
-	cursor: grabbing;
+body.toDraggable-body-down , body.toDraggable-body-move , body.toDraggable-body-down .toDraggable-box  , body.toDraggable-body-move .toDraggable-box{
+	cursor: move !important;
+	cursor: grabbing !important;
 }
-body.toDraggable-body-down .toDraggable-box-hover:not(.toDraggable-box-down){
-	cursor: move;
-	cursor: grab;
-	cursor: pointer;
+body.toDraggable-body-down .toDraggable-box-hover:not(.toDraggable-box-down) .toDraggable-box{
+	cursor: move !important;
+	cursor: grabbing !important;
+	cursor: pointer !important;
 }
 .toDraggable-with-icon.toDraggable-disabled{
 	cursor:not-allowed;
