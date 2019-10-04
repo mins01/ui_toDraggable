@@ -21,7 +21,7 @@ body.toDraggable-body-move{
 }
 .toDraggable-box-down.toDraggable-with-pointer-events-none{
 	pointer-events: none;
-	transform: scale(0.7);
+	transform: scale(0.9);
 }
 body.toDraggable-body-down .toDraggable-box-hover:not(.toDraggable-box-down){
 	box-shadow: 0px 0px 5px rgba(0, 0, 0, 1);	
